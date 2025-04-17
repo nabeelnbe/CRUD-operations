@@ -1,0 +1,60 @@
+<link rel="stylesheet" href="/css/userlogin.css">
+<div class="login-page">
+  <div class="form">
+    
+      <h2>User Registeration</h2>
+
+    <form method="post" action="/user/register">
+      <input type="hidden" id="message" value="{{{message}}}" name="message"/>
+      <input id="uname" type="text" placeholder="username" name="username"/>
+      <input id="npass" type="password" placeholder="new password" name="password"/>
+      <input id="cpass" type="password" placeholder="coform password" name="cpassword"/>
+      <button type="submit">Create</button>
+      
+    </form>
+  </div>
+</div>
+
+
+<script>
+
+  document.addEventListener('DOMContentLoaded', function(){
+      document.querySelector('form').addEventListener('submit',formvalidate);
+  });
+
+  const message = document.getElementById('message').value 
+  if (message) {
+    Swal.fire({
+    title: "Error",
+    text: message,
+    icon: "error"
+    });
+  }
+
+  function formvalidate(e) {
+    e.preventDefault();
+
+    var uname = document.getElementById('uname').value
+    var npassword = document.getElementById('npass').value
+    var cpassword = document.getElementById('cpass').value
+
+    if(uname == '' || npassword == '' || cpassword == ''){
+        Swal.fire({
+        title: "Validation Error",
+        text: "All fields are required!",
+        icon: "warning"
+      });
+      return false;
+    }else if(cpassword != npassword){
+       Swal.fire({
+        title: "Error",
+        text: "Passwords do not match!",
+        icon: "error"
+      });
+      return false;
+    }
+    
+    e.target.submit();
+    return true;
+  }
+</script>

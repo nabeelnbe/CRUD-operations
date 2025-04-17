@@ -1,0 +1,56 @@
+
+<link rel="stylesheet" href="/css/adminlogin.css" />
+
+<body>
+
+<div class="form">
+    
+<form action="/admin/login" method="post">
+
+	<h2>Admin Login</h2>
+
+	<input id="uname" type="text" name="username" class="text-field" placeholder="Username" />
+    <input id="pass" type="password" name="password" class="text-field" placeholder="Password" />
+    
+<button type="submit" class="button">Log In</button>
+
+</form>
+
+
+</div>
+<script>
+
+  document.addEventListener('DOMContentLoaded', function(){
+      document.querySelector('form').addEventListener('submit',formvalidate);
+  });
+
+  const message = "{{{message}}}"
+  if (message) {
+    Swal.fire({
+    
+    text: message,
+    
+    });
+  }
+
+  function formvalidate(e) {
+    e.preventDefault();
+
+    var uname = document.getElementById('uname').value
+    var password = document.getElementById('pass').value
+
+
+    if(uname == '' || password == ''){
+        Swal.fire({
+        title: "Validation Error",
+        text: "All fields are required!",
+        icon: "warning"
+      });
+      return false;
+    }
+    
+    e.target.submit();
+    return true;
+  }
+</script>
+</body>
